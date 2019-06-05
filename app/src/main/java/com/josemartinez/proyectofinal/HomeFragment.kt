@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import android.app.Activity
 import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -94,8 +95,19 @@ class HomeFragment : Fragment() {
         val caso = mutableMapOf<String, String>()
         caso["tipo"] = casoType
 
+        val builder = AlertDialog.Builder(this.context!!)
+        val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+        builder.setView(dialogView)
+        builder.setCancelable(false)
+
+        val dialog = builder.create()
+
+        // Muestra el cuadro de dialogo de cargando
+        dialog.show()
+
         db.collection("users").document(userDocument.id).collection("casos").add(caso as MutableMap<String, Any>).addOnCompleteListener {
             if(it.isSuccessful){
+                dialog.hide()
                 val listaId = it.result!!.id
                 bundle.putString("lista_id", listaId)
                 Navigation.findNavController(view)

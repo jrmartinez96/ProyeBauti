@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
@@ -50,8 +52,26 @@ class CrearDispositivo : Fragment() {
                 dispositivo["anio"] = ano
                 //lolololo
 
+                val builder = AlertDialog.Builder(this.context!!)
+                val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+                builder.setView(dialogView)
+                builder.setCancelable(false)
 
-                db.collection("users").document(userId as String).collection("casos").document(listaId as String).collection("dispositivos").add(dispositivo as MutableMap<String, Any>)
+                val dialog = builder.create()
+
+                // Muestra el cuadro de dialogo de cargando
+                dialog.show()
+
+                db.collection("users").document(userId as String).collection("casos").document(listaId as String).collection("dispositivos").add(dispositivo as MutableMap<String, Any>).addOnCompleteListener {
+                    if(it.isSuccessful){
+                        // TODO: REGRESAR A PANTALLA ANTERIOR
+                    } else {
+                        Toast.makeText(this.context, "Error al crear dispositivo, inténtelo de nuevo.", Toast.LENGTH_SHORT).show()
+                    }
+                    dialog.hide()
+                }
+            } else {
+                Toast.makeText(this.context, "Llene todos los campos", Toast.LENGTH_SHORT).show()
             }
 
         }
