@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.firestore.FirebaseFirestore
 import com.josemartinez.proyectofinal.clasesx.cartillas
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import java.util.ArrayList
@@ -29,6 +30,7 @@ import java.util.ArrayList
 class Resultados : Fragment() {
 
 
+    private lateinit var db: FirebaseFirestore
     public var grafica: BarChart?=null
    // public var graficaw: BarDataSet?=null
    // public var graficax: BarData?=null
@@ -39,6 +41,9 @@ class Resultados : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.title = "Resultados"
+
+        db = FirebaseFirestore.getInstance()
+
         // Crear binding
         val binding: FragmentResultadosBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_resultados, container, false)
 
@@ -48,46 +53,94 @@ class Resultados : Fragment() {
         //por ahora no lo usaremos
         var datoss  : ArrayList<String> = ArrayList()
 
+        val userId = arguments?.getString("user_id")
+        val lista_id = arguments?.getString("lista_id")
 
-        //datos para meter a las graficas
-        //aqui se debe modificar el segundo parametro(lo malo es que solo acepta INT entonces se redondea el resultado), el primer parametro dejalos así, el tercero pela.
-        //la versión que use de la librerria es algo temprana por diversos motivos use esa
+        val builder = AlertDialog.Builder(this.context!!)
+        val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+        builder.setView(dialogView)
+        builder.setCancelable(false)
 
-        datosa.add(BarEntry(1f,1,"hola"))
-        datosa.add(BarEntry(2f,2,"hola"))
-        datosa.add(BarEntry(3f,3,"hola"))
-        datosa.add(BarEntry(4f,4,"hola"))
-        datosa.add(BarEntry(5f,5,"hola"))
-        datosa.add(BarEntry(6f,6,"hola"))
-        datosa.add(BarEntry(7f,7,"hola"))
-        datosa.add(BarEntry(8f,8,"hola"))
+        val dialog = builder.create()
 
-        //por ahora no los usaremos
-        //estos dejalos así, son solo las pestañas de la grafica.
-        datoss.add("TV")
-        datoss.add("Radio")
-        datoss.add("PC")
-        datoss.add("Consola")
-        datoss.add("Refri")
-        datoss.add("Micro")
-        datoss.add("Cel")
-        datoss.add("Otros")
+        // Muestra el cuadro de dialogo de cargando
+        dialog.show()
+
+        db.collection("users").document(userId as String).collection("casos").document(lista_id as String).collection("dispositivos").get().addOnCompleteListener {
+            if(it.isSuccessful){
+                val docs = it.result?.documents;
+                var tele = 0f
+                var radio = 0f
+                var pc = 0f
+                var consola = 0f
+                var refri = 0f
+                var micro = 0f
+                var cargador = 0f
+                var otros = 0f
+
+                for (doc in docs!!.iterator()){
+                    val data = doc.data!!
+                    when(data["tipo"]){
+                        "televisor" -> tele += data["comsumo"].toString().toFloat()
+                        "radio" -> radio += data["comsumo"].toString().toFloat()
+                        "cpmputadora" -> pc += data["comsumo"].toString().toFloat()
+                        "consola" -> consola += data["comsumo"].toString().toFloat()
+                        "refrigeradora" -> refri += data["comsumo"].toString().toFloat()
+                        "microondas" -> micro += data["comsumo"].toString().toFloat()
+                        "cargador" -> cargador += data["comsumo"].toString().toFloat()
+                        "otro" -> otros += data["comsumo"].toString().toFloat()
+                    }
 
 
-        //ESTO QUE VIENE ESTA BIEN NO LO TOQUES
-        var  graficaw= BarDataSet(datosa,"Electrodomesticos")
-        binding.graficaEjemplo.animateY(500)
-        //var  graficasx= BarDataSet(datoss,"saber que es")
-       var graficax=BarData(datoss,graficaw)
-        //Color a las barras
-        graficaw.setColors(ColorTemplate.COLORFUL_COLORS)
+                }
 
-        //separacion(no se uso por complictos de versiones)
-      // graficax.setBarWidth=(0.9f)
-        binding.graficaEjemplo.setData(graficax)
-        //binding.graficaEjemplo.setFitBars(true)
+                //datos para meter a las graficas
+                //aqui se debe modificar el segundo parametro(lo malo es que solo acepta INT entonces se redondea el resultado), el primer parametro dejalos así, el tercero pela.
+                //la versión que use de la librerria es algo temprana por diversos motivos use esa
 
-        binding.graficaEjemplo.invalidate()
+                datosa.add(BarEntry(tele,1,"Tele"))
+                datosa.add(BarEntry(radio,2,"hola"))
+                datosa.add(BarEntry(pc,3,"hola"))
+                datosa.add(BarEntry(consola,4,"hola"))
+                datosa.add(BarEntry(refri,5,"hola"))
+                datosa.add(BarEntry(micro,6,"hola"))
+                datosa.add(BarEntry(cargador,7,"hola"))
+                datosa.add(BarEntry(otros,8,"hola"))
+
+                //por ahora no los usaremos
+                //estos dejalos así, son solo las pestañas de la grafica.
+                datoss.add("TV")
+                datoss.add("Radio")
+                datoss.add("PC")
+                datoss.add("Consola")
+                datoss.add("Refri")
+                datoss.add("Micro")
+                datoss.add("Cargador")
+                datoss.add("Otros")
+
+
+                //ESTO QUE VIENE ESTA BIEN NO LO TOQUES
+                var  graficaw= BarDataSet(datosa,"Electrodomesticos")
+                binding.graficaEjemplo.animateY(500)
+                //var  graficasx= BarDataSet(datoss,"saber que es")
+                var graficax=BarData(datoss,graficaw)
+                //Color a las barras
+                graficaw.setColors(ColorTemplate.COLORFUL_COLORS)
+
+                //separacion(no se uso por complictos de versiones)
+                // graficax.setBarWidth=(0.9f)
+                binding.graficaEjemplo.setData(graficax)
+                //binding.graficaEjemplo.setFitBars(true)
+
+                binding.graficaEjemplo.invalidate()
+
+            }
+
+            dialog.hide()
+        }
+
+
+
 
         // Crear evento al hacer click en boton
         binding.buttonRinicio.setOnClickListener(

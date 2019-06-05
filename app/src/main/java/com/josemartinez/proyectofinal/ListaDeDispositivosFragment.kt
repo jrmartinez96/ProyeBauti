@@ -54,10 +54,9 @@ class ListaDeDispositivosFragment : Fragment() {
         binding.buttonOtros.setOnClickListener{
             goToNext(it, "otro")
         }
-        binding.buttonGuardarxx.setOnClickListener(
-            // Navegar al siguiente fragment, le tenes que poner el id de la flechita del archivo de navigation
-            Navigation.createNavigateOnClickListener(R.id.action_listaDeDispositivosFragment_to_resultados)
-        )
+        binding.buttonGuardarxx.setOnClickListener{
+            goToResults(it)
+        }
 
         bundle = Bundle()
         bundle.putString("user_id", arguments?.getString("user_id"))
@@ -75,6 +74,10 @@ class ListaDeDispositivosFragment : Fragment() {
         bundle.putString("tipo_dispositivo", tipoDispositivo)
 
         Navigation.findNavController(view).navigate(R.id.action_listaDeDispositivosFragment_to_crearDispositivo, bundle)
+    }
+
+    fun goToResults(view: View){
+        Navigation.findNavController(view).navigate(R.id.action_listaDeDispositivosFragment_to_resultados, bundle)
     }
 
 
