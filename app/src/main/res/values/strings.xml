@@ -29,6 +29,12 @@
         consume tu equipo, con ello y las horas diaris que se usa la maquina sabremos cuanta energia elecrica consume el
         mismo
     </string>
+
+    <string name="login">LoginImage</string>
+    <string name="how_to">Acerca de esta App</string>
+    <string name="loading">Cargando</string>
+    <string name="mail">Ingresa tu correo&#8230;</string>
+    <string name="password">Ingresa tu contraseña&#8230;</string>
     <string name="resultadosResoursex">Resultados</string>
 
 
