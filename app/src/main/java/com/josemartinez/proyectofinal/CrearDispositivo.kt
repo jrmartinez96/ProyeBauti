@@ -65,6 +65,7 @@ class CrearDispositivo : Fragment() {
                 db.collection("users").document(userId as String).collection("casos").document(listaId as String).collection("dispositivos").add(dispositivo as MutableMap<String, Any>).addOnCompleteListener {
                     if(it.isSuccessful){
                         // TODO: REGRESAR A PANTALLA ANTERIOR
+                        fragmentManager?.popBackStack()
                     } else {
                         Toast.makeText(this.context, "Error al crear dispositivo, inténtelo de nuevo.", Toast.LENGTH_SHORT).show()
                     }
