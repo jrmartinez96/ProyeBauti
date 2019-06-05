@@ -75,7 +75,6 @@ class crearLugar : Fragment() {
             if(it.isSuccessful){
                 val listaId = it.result!!.id
                 bundle.putString("lista_id", listaId)
-                findNavController(view).navigate(R.id.action_crearLugar_to_listaDeDispositivosFragment, bundle)
             }
         }
     }

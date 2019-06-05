@@ -58,10 +58,6 @@ class ListaDeDispositivosFragment : Fragment() {
             // Navegar al siguiente fragment, le tenes que poner el id de la flechita del archivo de navigation
             Navigation.createNavigateOnClickListener(R.id.action_listaDeDispositivosFragment_to_resultados)
         )
-        binding.buttonCancelar.setOnClickListener(
-            // Navegar al siguiente fragment, le tenes que poner el id de la flechita del archivo de navigation
-            Navigation.createNavigateOnClickListener(R.id.action_listaDeDispositivosFragment_to_crearLugar)
-        )
 
         bundle = Bundle()
         bundle.putString("user_id", arguments?.getString("user_id"))
