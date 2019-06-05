@@ -48,6 +48,7 @@ class CrearDispositivo : Fragment() {
                 dispositivo["uso"] = uso
                 dispositivo["marca"] = marca
                 dispositivo["anio"] = ano
+                //lolololo
 
 
                 db.collection("users").document(userId as String).collection("casos").document(listaId as String).collection("dispositivos").add(dispositivo as MutableMap<String, Any>)
