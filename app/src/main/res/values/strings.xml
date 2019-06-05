@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Smart Energy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="casaResourse">Casa</string>
+    <string name="empresaResourse">Empresa</string>
+    <string name="otrosResourse">Otros</string>
+    <string name="tvResourse">TV</string>
+    <string name="radioResourse">Radio</string>
+    <string name="pcResourse">PC</string>
+    <string name="consolaResourse">Consola</string>
+    <string name="refriResourse">Refri</string>
+    <string name="microResourse">Micro</string>
+    <string name="cargadorResourse">Cargador</string>
+    <string name="regresarResourse">Regresar</string>
+    <string name="nuevo_casoResourse">Nuevo Caso</string>
+    <string name="casos_anterioresResourse">Casos anteriores</string>
+    <string name="atrasResoourse">atras</string>
+    <string name="completadoResourse">Completado</string>
+    <string name="textviewRecomendaciones">Los resultados mostraron que efectivamente existen diversos electrodomesticos
+        los cuales son potencialemnte productores de consumo excsivo de luz tales como: Televisores Viejos,
+        Refrigeradoras antiguas y focos de mucho consumo. Las recomendaciones para el usuario son las siguientes,
+        cambiar los elementos anteriormente mensionados
+    </string>
+    <string name="textviewAyudita">Debes saber que el consumo de energia electrica se da en lo que es Kwatts Hora, por
+        lo tanto es necesario saber cuanta corriente y voltaje consume tu dispositivo, luego de ello multiplicar estos
+        dos, uno debe de estar en voltios y otro en amperios, luego divide dentro de mil(100) y tendras la potencia que
+        consume tu equipo, con ello y las horas diaris que se usa la maquina sabremos cuanta energia elecrica consume el
+        mismo
+    </string>
+    <string name="resultadosResoursex">Resultados</string>
+
+
+</resources>

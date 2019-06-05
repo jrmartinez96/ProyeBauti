@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ListaDeDispositivosFragment">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="@string/otrosResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonOtros"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonMicroondas"
+                    app:layout_constraintStart_toEndOf="@+id/buttonCargador" android:layout_marginStart="8dp"
+                    android:backgroundTint="@android:color/holo_orange_light"/>
+            <Button
+                    android:text="@string/cargadorResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonCargador"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonRefrigerador"
+                    app:layout_constraintStart_toStartOf="@+id/buttonRefrigerador" android:layout_marginTop="16dp"
+                    android:backgroundTint="@android:color/darker_gray"/>
+            <Button
+                    android:text="@string/microResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonMicroondas"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonConsola"
+                    app:layout_constraintStart_toEndOf="@+id/buttonRefrigerador"
+                    android:layout_marginStart="8dp" android:backgroundTint="?attr/colorPrimary"/>
+            <Button
+                    android:text="@string/tvResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonTelevisor"
+                    android:layout_marginTop="18dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="80dp" android:backgroundTint="@android:color/holo_red_dark"/>
+            <Button
+                    android:text="@string/radioResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonRadio"
+                    app:layout_constraintTop_toTopOf="@+id/buttonTelevisor"
+                    app:layout_constraintStart_toEndOf="@+id/buttonTelevisor"
+                    android:layout_marginStart="8dp" android:backgroundTint="@android:color/holo_blue_light"/>
+            <Button
+                    android:text="@string/pcResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonComputadora"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonTelevisor"
+                    app:layout_constraintStart_toStartOf="@+id/buttonTelevisor"
+                    android:backgroundTint="@android:color/holo_green_light"/>
+            <Button
+                    android:text="@string/consolaResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonConsola"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonRadio"
+                    app:layout_constraintStart_toEndOf="@+id/buttonComputadora"
+                    android:layout_marginStart="8dp" android:backgroundTint="@android:color/holo_orange_dark"/>
+            <Button
+                    android:text="@string/refriResourse"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" android:id="@+id/buttonRefrigerador"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonComputadora"
+                    app:layout_constraintStart_toStartOf="@+id/buttonComputadora"
+                    android:backgroundTint="@android:color/holo_purple"/>
+            <Button
+                    android:text="Resultados"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonGuardarxx"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonCargador"
+                    app:layout_constraintStart_toStartOf="@+id/buttonCargador" android:layout_marginTop="2dp"
+                    android:backgroundTint="@color/design_default_color_primary"/>
+            <Button
+                    android:text="Cancelar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonCancelar"
+                    app:layout_constraintStart_toEndOf="@+id/buttonGuardarxx"
+                    android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/buttonGuardarxx"
+                    android:backgroundTint="@color/colorAccent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>
