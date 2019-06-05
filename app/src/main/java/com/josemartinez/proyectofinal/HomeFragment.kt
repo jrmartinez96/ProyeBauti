@@ -14,6 +14,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.josemartinez.proyectofinal.clasesx.adaptador
 import com.josemartinez.proyectofinal.clasesx.cartillas
 import com.josemartinez.proyectofinal.databinding.FragmentHomeBinding
@@ -21,6 +24,11 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.ArrayList
 
 class HomeFragment : Fragment() {
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    private lateinit var bundle: Bundle
+    private lateinit var userDocument: DocumentSnapshot
 
 
     //declaramos nuestros elementos necesarios como listas y el mismo recicle para trabajar
@@ -41,6 +49,23 @@ class HomeFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = "Lista de Lugares"
 
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
+        bundle = Bundle()
+
+        val email = auth.currentUser?.email
+
+        db.collection("users").whereEqualTo("email", email).get().addOnCompleteListener {
+
+            if(it.isSuccessful){
+                userDocument = it.result!!.documents[0]
+
+                bundle.putString("user_id", userDocument.id)
+            }
+
+        }
+
         //este for es solo ejemplo para determinar si funciona correctamente el recicleview
         for (i in 0..20){
             val cartillax: cartillas
@@ -53,38 +78,29 @@ class HomeFragment : Fragment() {
             cartillax.consumo=codigo.toInt()
             listaProductosx!!.add(cartillax)
         }
-        // para agregar elementos a lista
-        // Crear binding
-
-
-          val bindingDos: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
-          //listaRecicle=bindingDos.recicleVista
-
-          // v=inflater.inflate(R.layout.fragment_home,container,false)
-          //listaRecicle=v.findViewById(R.id.recicleVista)
-         //  listaRecicle.layoutManager=LinearLayoutManager(this.context)
-         //  var listaRecicle=findViewById(R.id.reciclevista) as RecyclerView
-         //  var mLayountManager=LinearLayoutManager(this.context,LinearLayoutManager.VERTICAL,false)
-         // listaRecicle!!.layoutManager=mLayountManager
-         // miAdaptador= adaptador(listaProductosx)
-        //  listaRecicle!!.adapter=miAdaptador
 
         // Crear binding
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         // Crear evento al hacer click en boton
-        binding.botonCasoN.setOnClickListener(
-            // Navegar al siguiente fragment, le tenes que poner el id de la flechita del archivo de navigation
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_crearLugar)
-        )
+        binding.botonCasoN.setOnClickListener{
+            goToNext("empresa", it)
+        }
         // Retornar esto siempre
         return binding.root
-
-
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    fun goToNext(casoType: String, view: View) {
+        val caso = mutableMapOf<String, String>()
+        caso["tipo"] = casoType
 
+        db.collection("users").document(userDocument.id).collection("casos").add(caso as MutableMap<String, Any>).addOnCompleteListener {
+            if(it.isSuccessful){
+                val listaId = it.result!!.id
+                bundle.putString("lista_id", listaId)
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_crearLugar_to_listaDeDispositivosFragment, bundle)
+            }
+        }
+    }
 }
