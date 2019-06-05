@@ -22,7 +22,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Año/modelo"/>
+                        android:hint="Año/modelo"
+                        android:id="@+id/modelo_input"
+                />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="300dp"
@@ -33,7 +35,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Marca"/>
+                        android:hint="Marca"
+                        android:id="@+id/marca_input"
+                />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="300dp"
@@ -44,7 +48,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Horas Uso/dia"/>
+                        android:hint="Horas Uso/dia"
+                        android:id="@+id/horas_uso_input"
+                />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="300dp"
@@ -55,7 +61,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Consumo Kwatts"/>
+                        android:hint="Consumo Kwatts"
+                        android:id="@+id/kwatts_input"
+                />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="300dp"
@@ -66,31 +74,25 @@
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nombre"/>
+                        android:hint="Nombre"
+                        android:id="@+id/nombre_dispositivo"
+                />
             </com.google.android.material.textfield.TextInputLayout>
             <Button
                     android:text="Guardar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonGuardarxx" android:layout_marginTop="8dp"
+                    android:id="@+id/buttonGuardarxx" android:layout_marginTop="24dp"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAño"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="64dp"/>
-            <Button
-                    android:text="Cancelar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/buttonCancelar"
-                    app:layout_constraintTop_toTopOf="@+id/buttonGuardarxx"
-                    app:layout_constraintStart_toEndOf="@+id/buttonGuardarxx"
-                    android:layout_marginStart="32dp"/>
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="148dp"/>
             <Button
                     android:text="Ayuda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonAyuda" android:layout_marginTop="16dp"
+                    android:id="@+id/buttonAyuda" android:layout_marginTop="48dp"
                     app:layout_constraintTop_toBottomOf="@+id/buttonGuardarxx"
                     app:layout_constraintStart_toStartOf="@+id/buttonGuardarxx"
-                    android:layout_marginStart="60dp"/>
+            />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>
